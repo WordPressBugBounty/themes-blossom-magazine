@@ -39,36 +39,47 @@ function blossom_magazine_add_sidebar_layout_box(){
 }
 add_action( 'add_meta_boxes', 'blossom_magazine_add_sidebar_layout_box' );
 
-$blossom_magazine_sidebar_layout = array(    
-    'default-sidebar'=> array(
-    	 'value'     => 'default-sidebar',
-    	 'label'     => __( 'Default Sidebar', 'blossom-magazine' ),
-    	 'thumbnail' => get_template_directory_uri() . '/images/default-sidebar.png'
-   	),
-    'no-sidebar'     => array(
-    	 'value'     => 'no-sidebar',
-    	 'label'     => __( 'Full Width', 'blossom-magazine' ),
-    	 'thumbnail' => get_template_directory_uri() . '/images/full-width.png'
-   	),  
-    'centered'     => array(
-    	 'value'     => 'centered',
-    	 'label'     => __( 'Full Width Centered', 'blossom-magazine' ),
-    	 'thumbnail' => get_template_directory_uri() . '/images/full-width-centered.png'
-   	),
-    'left-sidebar' => array(
-         'value'     => 'left-sidebar',
-    	 'label'     => __( 'Left Sidebar', 'blossom-magazine' ),
-    	 'thumbnail' => get_template_directory_uri() . '/images/left-sidebar.png'         
-    ),
-    'right-sidebar' => array(
-         'value'     => 'right-sidebar',
-    	 'label'     => __( 'Right Sidebar', 'blossom-magazine' ),
-    	 'thumbnail' => get_template_directory_uri() . '/images/right-sidebar.png'         
-     )    
-);
+
+/**
+ * Get sidebar layout data
+ *
+ * @since 1.0.0
+ */
+if( ! function_exists( 'blossom_magazine_get_sidebar_layout_data' ) ){
+    function blossom_magazine_get_sidebar_layout_data(){
+        return array(
+            'default-sidebar'=> array(
+                'value'     => 'default-sidebar',
+                'label'     => __( 'Default Sidebar', 'blossom-magazine' ),
+                'thumbnail' => get_template_directory_uri() . '/images/default-sidebar.png'
+            ),
+            'no-sidebar'     => array(
+                'value'     => 'no-sidebar',
+                'label'     => __( 'Full Width', 'blossom-magazine' ),
+                'thumbnail' => get_template_directory_uri() . '/images/full-width.png'
+            ),  
+            'centered'     => array(
+                'value'     => 'centered',
+                'label'     => __( 'Full Width Centered', 'blossom-magazine' ),
+                'thumbnail' => get_template_directory_uri() . '/images/full-width-centered.png'
+            ),
+            'left-sidebar' => array(
+                'value'     => 'left-sidebar',
+                'label'     => __( 'Left Sidebar', 'blossom-magazine' ),
+                'thumbnail' => get_template_directory_uri() . '/images/left-sidebar.png'         
+            ),
+            'right-sidebar' => array(
+                'value'     => 'right-sidebar',
+                'label'     => __( 'Right Sidebar', 'blossom-magazine' ),
+                'thumbnail' => get_template_directory_uri() . '/images/right-sidebar.png'         
+            )
+        );
+    }
+}
 
 function blossom_magazine_sidebar_layout_callback(){
-    global $post , $blossom_magazine_sidebar_layout;
+    global $post;
+    $blossom_magazine_sidebar_layout = blossom_magazine_get_sidebar_layout_data();
     wp_nonce_field( basename( __FILE__ ), 'blossom_magazine_nonce' ); ?>     
     <table class="form-table">
         <tr>
@@ -96,7 +107,8 @@ function blossom_magazine_sidebar_layout_callback(){
 }
 
 function blossom_magazine_save_sidebar_layout( $post_id ){
-    global $blossom_magazine_sidebar_layout;
+    $blossom_magazine_sidebar_layout = blossom_magazine_get_sidebar_layout_data();
+
 
     // Verify the nonce before proceeding.
     if( !isset( $_POST[ 'blossom_magazine_nonce' ] ) || !wp_verify_nonce( $_POST[ 'blossom_magazine_nonce' ], basename( __FILE__ ) ) )
