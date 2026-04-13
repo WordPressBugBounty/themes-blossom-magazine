@@ -2,9 +2,9 @@
 
 Contributors: blossomthemes
 Requires at least: 6.2
-Requires PHP: 7.3
+Requires PHP: 7.4
 Tested up to: 6.9
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: blog, one-column, two-columns, right-sidebar, left-sidebar, footer-widgets, custom-background, custom-header, custom-menu, custom-logo, featured-images, threaded-comments, full-width-template, rtl-language-support, translation-ready, theme-options, e-commerce, news
@@ -112,6 +112,10 @@ All other images including icon image used in screenshot and images used in cust
 
 == Changelog ==
     
+    1.1.2 - April 02, 2026
+    * Fix: Updated PHP to 7.4.
+    * Update: Google Fonts Library has been updated.
+
     1.1.1 - February 03, 2026
     * Fix: Translation loading early issue has been fixed.
     * Update: Google Fonts Library has been updated.
